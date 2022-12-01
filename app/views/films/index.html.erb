@@ -3,7 +3,7 @@
 <% @films.each do |film| %>
   <div id="film-attributes-<%=film.id %>">
     <h3><%= link_to film.name, "/films/#{film.id}" %></h3>
-    
     <ul>Director: <%= film.director.name %>, Release Year <%= film.release_year %>, Best Picture Oscar Winner? <%= film.best_picture_oscar%></ul>
+    <ul>Entry Created (dd/mm/yyyy): <%= film.created_at.strftime("%d/%m/%Y") %>, Entry Last Updated (dd/mm/yyyy): <%= film.updated_at.strftime("%d/%m/%Y")%></ul>
   </div>
 <% end %>

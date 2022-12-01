@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Directors Show Page' do
+RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
   before(:each) do 
     @c_eastwood = Director.create!(name: 'Clint Eastwood',best_director_oscars: 2 ,multiple_best_director_nominations: true)
     @k_bigelow = Director.create!(name: 'Kathryn Bigelow',best_director_oscars: 1,multiple_best_director_nominations: false)
@@ -27,28 +27,25 @@ RSpec.describe 'Directors Show Page' do
   
   end
   
-  describe 'User Story 2' do
-    it "displays a specific director's attributes" do
-      visit ("/directors/#{@s_spielberg.id}")
-      # save_and_open_page
-      expect(page).to_not have_content(@s_kubrick.name)
-      expect(page).to_not have_content(@k_bigelow.best_director_oscars)
-      expect(page).to_not have_content(@zero_dark_thirty.name)
-
-      expect(page).to have_content(@s_spielberg.name)
-      expect(page).to have_content(@s_spielberg.best_director_oscars)
-      expect(page).to have_content(@s_spielberg.multiple_best_director_nominations)
-    end
-
-    it "sends user to the director_film index page when the 'Film Catalogue' is click" do      
-      visit ("/directors/#{@s_spielberg.id}")
+  describe 'User Story 5' do
+    it "displays each film that is associated with that director with each film's attributes" do
+      visit ("/directors/#{@c_eastwood.id}/films")
+      expect(page).to_not have_content(@s_spielberg.name)
+      expect(page).to have_content(@c_eastwood.name)
       
-      click_on ('Film Catalogue')
-      
-      expect(current_path).to_not eq("/films")
-      expect(current_path).to_not eq("/directors/#{@s_kubrick.id}")
+      expect(page).to have_content(@million_dollar_baby.name)
+      expect(page).to have_content(@mystic_river.release_year) 
+      expect(page).to have_content(@true_crime.best_picture_oscar)
 
-      expect(current_path).to eq("/directors/#{@s_spielberg.id}/films")
+      within("#director-film-attributes-#{@unforgiven.id}")do
+        expect(page).to_not have_content(@million_dollar_baby.name)
+        expect(page).to_not have_content(@mystic_river.release_year) 
+        expect(page).to_not have_content(@true_crime.best_picture_oscar)
+
+        expect(page).to have_content(@unforgiven.name)
+        expect(page).to have_content(@unforgiven.release_year) 
+        expect(page).to have_content(@unforgiven.best_picture_oscar)
+      end
     end
   end
 end
