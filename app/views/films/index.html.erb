@@ -1,1 +1,9 @@
-<h1>Film Index</h1>
+<h1 style="color: OrangeRed"><center>Films<center></h1>
+
+<% @films.each do |film| %>
+  <div id="film-attributes-<%=film.id %>">
+    <h3><%= link_to film.name, "/films/#{film.id}" %></h3>
+    <ul>Release Year <%= film.release_year %>, Best Picture Oscar Winner? <%= film.best_picture_oscar%></ul>
+  </div>
+
+<% end %>

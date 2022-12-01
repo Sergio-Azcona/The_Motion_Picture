@@ -1,6 +1,6 @@
 <h1 style="color: navy"><center>Directors<center></h1>
 
 <% @directors.each do |director| %>
-  <p><strong><%= director.name %></strong></p>
+  <p><strong><%= link_to director.name, "/directors/#{director.id}"  %></strong></p>
 <hr>
 <% end %>

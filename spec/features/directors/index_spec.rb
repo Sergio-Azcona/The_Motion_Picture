@@ -37,6 +37,15 @@ RSpec.describe 'Directors Index Page' do
       expect(page).to have_content(@s_kubrick.name)
       expect(page).to have_content(@s_spielberg.name)
     end
+
+    it "sends user to the director's show page when their name is click" do      
+      click_on ('Steven Spielberg')
+      
+      expect(current_path).to_not eq("/films/#{@c_eastwood.id}")
+      expect(current_path).to_not eq("/directors/#{@jurassic_park .id}")
+      
+      expect(current_path).to eq("/directors/#{@s_spielberg.id}")
+    end
   end
   # save_and_open_page
 
