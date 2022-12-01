@@ -38,11 +38,22 @@ RSpec.describe 'Films Index Page' do
         expect(page).to_not have_content(@schindlers_list.name)
         expect(page).to_not have_content(@mystic_river.release_year) 
         expect(page).to_not have_content(@hurt_locker.best_picture_oscar)
+        expect(page).to_not have_content(@perfect_world.director.name)
 
         expect(page).to have_content(@jurassic_park.name)
         expect(page).to have_content(@jurassic_park.release_year) 
         expect(page).to have_content(@jurassic_park.best_picture_oscar)
+        expect(page).to have_content(@jurassic_park.director.name)
       end
+    end
+    
+    it "sends user to the film's show page when the film name is click" do      
+      click_on ('Jurassic Park')
+      
+      # expect(current_path).to_not eq("/directors/#{@s_spielberg.id}")
+      expect(current_path).to_not eq("/films/#{@firelight.id}")
+      
+      expect(current_path).to eq("/films/#{@jurassic_park .id}")
     end
   end
 end

@@ -1,0 +1,4 @@
+<h1 style="color: DarkRed"><center><%= @film.name %><center></h1>
+<p><h3>Release Year: <%= @film.release_year%></h3></p>
+<p><h3>Won Best Picture Oscar? <%= @film.best_picture_oscar%></h3></p> 
+<p><h3>Director: <%= link_to @film.director.name, "/directors/#{@film.director.id}" %></h3></p>

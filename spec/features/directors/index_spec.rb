@@ -32,6 +32,10 @@ RSpec.describe 'Directors Index Page' do
     it 'page displays the name of each parent record in the system' do
       expect(page).to_not have_content(@true_crime.name)
       expect(page).to_not have_content(@schindlers_list.release_year)
+      expect(page).to_not have_content(@hurt_locker.best_picture_oscar)
+      expect(page).to_not have_content(@perfect_world.director.name)
+      expect(page).to_not have_content(@j_campion.name)
+
       expect(page).to have_content(@c_eastwood.name)
       expect(page).to have_content(@k_bigelow.name)
       expect(page).to have_content(@s_kubrick.name)
