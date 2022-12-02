@@ -1,0 +1,10 @@
+
+<center><h1 style="color: RoyalBlue"><%= @director.name %> Films</h1></center>
+
+<% @films.each do |film| %>
+  <div id="director-film-attributes-<%=film.id %>">
+    <h3 style="color: FireBrick"><%= film.name %></h3>
+    <ul>Release Year <%= film.release_year %>, Best Picture Oscar Winner? <%= film.best_picture_oscar%></ul>
+   <ul>Entry Created (dd/mm/yyyy): <%= film.created_at.strftime("%d/%m/%Y") %>, Entry Last Updated (dd/mm/yyyy): <%= film.updated_at.strftime("%d/%m/%Y")%></ul>
+  </div>
+<% end %>
