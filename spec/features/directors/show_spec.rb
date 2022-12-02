@@ -50,4 +50,19 @@ RSpec.describe 'Directors Show Page' do
       expect(current_path).to eq("/directors/#{@s_spielberg.id}/films")
     end
   end
+
+  describe 'User Story 7' do
+    it 'displays the count/number of films associated with this director' do
+      
+      visit ("/directors/#{@s_spielberg.id}")
+      
+      expect(page).to_not have_content(@c_eastwood.film_count)
+      expect(page).to have_content(@s_spielberg.film_count)
+      
+      visit ("/directors/#{@s_kubrick.id}")
+      
+      expect(page).to_not have_content(@c_eastwood.film_count)
+      expect(page).to have_content(@s_kubrick.film_count)
+    end
+  end
 end

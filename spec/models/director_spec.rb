@@ -33,7 +33,17 @@ RSpec.describe Director do
       expect(Director.last_created).to_not eq([@s_kubrick,@c_eastwood,@k_bigelow,@c_eastwood])
       expect(Director.last_created).to eq([@s_kubrick,@k_bigelow,@c_eastwood])
     end
-  
+  end
+
+  describe 'User Story 7, Parent Child Count' do
+    it 'displays the count/number of films associated with this director' do
+      expect(@s_kubrick.film_count).to_not eq 5
+      expect(@c_eastwood.film_count).to_not eq 3
+      
+      expect(@s_kubrick.film_count).to eq 3
+      expect(@c_eastwood.film_count).to eq 5
+    end
+
   end
     
 end

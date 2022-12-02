@@ -6,5 +6,9 @@ class Director < ApplicationRecord
   def self.last_created
     order(created_at: :desc)
   end
+
+  def film_count
+    films.count
+  end
   
 end
