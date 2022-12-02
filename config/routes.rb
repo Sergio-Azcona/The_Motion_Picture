@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   get '/', to: 'welcome#index'
   get '/directors', to: 'directors#index'
+  get '/directors/new', to: 'directors#new'
   get '/directors/:id', to: 'directors#show'
+  post '/directors', to: 'directors#create'
   
   get '/films', to: 'films#index'
   get '/films/:id', to: 'films#show'
