@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Directors Index Page' do
   before(:each) do 
-    @c_eastwood = Director.create!(name: 'Clint Eastwood',best_director_oscars: 2 ,multiple_best_director_nominations: true)
-    @k_bigelow = Director.create!(name: 'Kathryn Bigelow',best_director_oscars: 1,multiple_best_director_nominations: false)
-    @s_kubrick = Director.create!(name: 'Stanley Kubrick',best_director_oscars: 0,multiple_best_director_nominations: true)
+    @c_eastwood = Director.create!(name: 'Clint Eastwood',best_director_oscars: 2 ,multiple_best_director_nominations: true, created_at: Time.now - 400.hours)
+    @k_bigelow = Director.create!(name: 'Kathryn Bigelow',best_director_oscars: 1,multiple_best_director_nominations: false, created_at: 6.hours.ago)
+    @s_kubrick = Director.create!(name: 'Stanley Kubrick',best_director_oscars: 0,multiple_best_director_nominations: true, created_at: 6.hours.ago)
     @s_spielberg = Director.create!(name: 'Steven Spielberg',best_director_oscars: 2 ,multiple_best_director_nominations: true)
     
     @million_dollar_baby = @c_eastwood.films.create!(name:'Million Dollar Baby', release_year: 2004, best_picture_oscar: true)
@@ -49,6 +49,13 @@ RSpec.describe 'Directors Index Page' do
       expect(current_path).to eq("/directors/#{@s_spielberg.id}")
     end
   end
-  # save_and_open_page
+
+  describe 'User Story 6' do 
+    it "discplays director index sorted by Most Recently Created" do
+      expect(@s_spielberg.name).to appear_before(@s_kubrick.name)
+      expect(@s_kubrick.name).to appear_before(@k_bigelow.name)
+      expect(@k_bigelow.name).to appear_before(@c_eastwood.name)
+    end
+  end
 
 end
