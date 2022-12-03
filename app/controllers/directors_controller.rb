@@ -6,22 +6,25 @@ class DirectorsController < ApplicationController
   def show
     @director = Director.find(params[:id])
   end
+    # require 'pry';binding.pry!!
+    # @director = Director.find(params[:id])
+    # @new_director = @director.new
+    # rendirect_to :create
 
   def new
-    # @director = Director.find(params[:id])
   end
   
   def create
-    @director = Director.find(params[:id])
     @director = Director.create(director_params)
-    
     if @director.save 
       flash.notice = "New Entry Created"
       redirect_to directors_path
     else
       flash.notice = "Unacceptable Entry - Try Again"
+      render :new
     end
   end
+  # flash message hide elemtent  https://bobbyhadz.com/blog/javascript-hide-element-after-few-seconds
 
 
   private

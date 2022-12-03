@@ -37,6 +37,42 @@ RSpec.describe 'Create New Director Page' do
       expect(current_path).to eq(directors_new_path)
     end
 
+    describe "page has a form for user to fill in directos attributes" do
+      describe "page has an 'Add Director' button- which sends user to director index" do
+        it "displays the new record to director index page and a successful flash message" do
+          visit (directors_new_path)
+
+          fill_in('Name', with: "Sam de Jong")
+          fill_in('best_director_oscars', with: '0')
+          choose('multiple_best_director_nominations', with: 'false')
+          
+          click_button('Add Director') 
+
+          expect(current_path).to_not eq(films_path)
+          expect(current_path).to eq(directors_path)
+
+          expect(page).to have_content('Sam de Jong')
+          expect(page).to have_content('New Entry Created')
+        end
+      end
+
+      xdescribe "if entry is incomplete and user clicks 'Add Director' button - submission is not accepted" do
+        it 'send the user back to the create page and allows them to create a new entry for submission' do
+          visit (directors_new_path)
+
+          fill_in('Name', with: "Sam de Jong")
+          fill_in('best_director_oscars', with: '0')
+          choose('multiple_best_director_nominations', with: '')
+          
+          click_button('Add Director') 
+
+          # expect(current_path).to_not eq(directors_path)
+          expect(current_path).to eq(directors_new_path)
+
+          # expect(page).to have_content('Unacceptable Entry - Try Again')
+        end
+      end
+    end
 
   end
 end

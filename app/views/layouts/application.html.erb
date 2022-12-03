@@ -11,12 +11,19 @@
 
   <body>
 
-<div style="position:fixed; padding: 1em; top: 0; right: 0;">
-  <i><%= link_to 'Directors', directors_path %>
-  <%= link_to 'Films', films_path %>
-  <%= link_to 'Main', "/" %></i>
-</div>
+    <div style="position:fixed; padding: 1em; top: 0; right: 0;">
+      <i><%= link_to 'Directors', directors_path %>
+      <%= link_to 'Films', films_path %>
+      <%= link_to 'Main', "/" %></i>
+    </div>
+
+    <% flash.each do |type, message| %>
+      <div>
+        <h3 style="color: Red"><%= message %></h3>
+      </div>
+    <% end %>
 
     <%= yield %>
+
   </body>
 </html>

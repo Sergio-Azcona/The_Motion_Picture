@@ -5,6 +5,9 @@ RSpec.describe Director do
     it { should have_many(:films) }
 
     it { should validate_presence_of :name }
+    it { should allow_value(true).for :multiple_best_director_nominations  }
+    it { should allow_value(false).for :multiple_best_director_nominations  }
+    # it { should validate :multiple_best_director_nominations }
     it { should validate_numericality_of :best_director_oscars }
   end
 
