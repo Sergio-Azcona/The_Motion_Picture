@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Create New Director Page' do
+RSpec.describe 'Edit Existing Director Page' do
   before(:each) do 
     @c_eastwood = Director.create!(name: 'Clint Eastwood',best_director_oscars: 2 ,multiple_best_director_nominations: true, created_at: Time.now - 400.hours)
     @k_bigelow = Director.create!(name: 'Kathryn Bigelow',best_director_oscars: 1,multiple_best_director_nominations: false, created_at: 6.hours.ago)
@@ -26,52 +26,25 @@ RSpec.describe 'Create New Director Page' do
     @schindlers_list = @s_spielberg.films.create!(name:"Schindler's List", release_year: 1993, best_picture_oscar: true)
   end
   
-  describe 'User Story 11' do
-    it "has a 'New Director' link on the director indext page that takes user to '/directors/new'" do
-      visit (directors_path)
+  describe 'User Story 12' do
+    describe 'show page has a link to make edits' do
+      it 'sends users to the edit page where existing values are prefilled' do
+        visit ("directors/#{@s_spielberg.id}")
 
-      click_link ('Create New Director')
-
-      expect(current_path).to_not eq(films_path)
-      expect(current_path).to eq(directors_new_path)
-    end
-
-    describe "page has a form for user to fill in directos attributes" do
-      describe "page has an 'Add Director' button- which sends user to director index" do
-        it "displays the new record to director index page and a successful flash message" do
-          visit (directors_new_path)
-
-          fill_in('Name', with: "Sam de Jong")
-          fill_in('best_director_oscars', with: '0')
-          choose('multiple_best_director_nominations', with: 'false')
-          
-          click_button('Add Director') 
-
-          expect(current_path).to_not eq(films_path)
-          expect(current_path).to eq(directors_path)
-
-          expect(page).to have_content('Sam de Jong')
-          expect(page).to have_content('New Entry Created')
-        end
+        click_link ('Update Director')
+  
+        expect(current_path).to_not eq(directors_new_path)
+        expect(current_path).to eq("/directors/#{@s_spielberg.id}/edit")
       end
 
-      xdescribe "if entry is incomplete and user clicks 'Add Director' button - submission is not accepted" do
-        it 'send the user back to the create page and allows them to create a new entry for submission' do
-          visit (directors_new_path)
+    end
 
-          fill_in('Name', with: "Sam de Jong")
-          fill_in('best_director_oscars', with: '0')
-          choose('multiple_best_director_nominations', with: '')
-          
-          click_button('Add Director') 
-
-          # expect(current_path).to_not eq(directors_path)
-          expect(current_path).to eq(directors_new_path)
-
-          # expect(page).to have_content('Unacceptable Entry - Try Again')
+    xdescribe "edit page has a form for user to update directos attributes" do
+      describe "page has an 'Update Director' button- which reflects the updates on the director show page" do
+        it 'displays the edits on the show page' do
         end
       end
     end
-
   end
+
 end

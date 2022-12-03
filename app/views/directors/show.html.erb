@@ -3,3 +3,7 @@
 <p><h3> Number of Best Director Oscars: <%= @director.best_director_oscars %></h3></p>
 <p><h3> Has Multiple Best Director Nominations? <%= @director.multiple_best_director_nominations%></h3></p>
 <p><h3><%= link_to 'Film Catalogue', "/directors/#{@director.id}/films" %></h3></p>
+
+<div style="position:fixed; padding: 1em; bottom:0; right: 0;">
+  <i><%= link_to 'Update Director', "#{@director.id}/edit" %></i>
+</div>
