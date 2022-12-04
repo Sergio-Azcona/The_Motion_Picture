@@ -51,7 +51,7 @@ RSpec.describe 'Create New Director Page' do
           expect(current_path).to eq(directors_path)
 
           expect(page).to have_content('Sam de Jong')
-          expect(page).to have_content('New Entry Created')
+          expect(page).to have_content('Update Successful')
         end
       end
 

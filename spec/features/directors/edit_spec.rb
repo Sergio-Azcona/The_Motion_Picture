@@ -27,22 +27,55 @@ RSpec.describe 'Edit Existing Director Page' do
   end
   
   describe 'User Story 12' do
-    describe 'show page has a link to make edits' do
-      it 'sends users to the edit page where existing values are prefilled' do
-        visit ("directors/#{@s_spielberg.id}")
+    it "has a link on the director show page that sends users to the edit page for that director" do
+      visit ("directors/#{@s_spielberg.id}")
 
-        click_link ('Update Director')
-  
-        expect(current_path).to_not eq(directors_new_path)
-        expect(current_path).to eq("/directors/#{@s_spielberg.id}/edit")
-      end
+      click_link ('Update Director')
 
+      expect(current_path).to_not eq(directors_new_path)
+      expect(current_path).to_not eq("/directors/#{@s_kubrick.id}/edit")
+      expect(current_path).to eq("/directors/#{@s_spielberg.id}/edit")
     end
 
-    xdescribe "edit page has a form for user to update directos attributes" do
-      describe "page has an 'Update Director' button- which reflects the updates on the director show page" do
-        it 'displays the edits on the show page' do
+    describe "edit page has a form to update directors info and 'Update Director' option to execute the changes" do
+      describe "allows user to edit the attribute fields and hit 'Update Director', which returns to the director show page" do
+    
+        it "displays the director's existing attribute values prefilled on the edit page" do
+
+          visit ("/directors/#{@s_spielberg.id}/edit")
+
+          expect(page).to_not have_content(@s_kubrick.name)
+          expect(page).to_not have_content(@k_bigelow.best_director_oscars)
+        
+          expect(page).to have_content("Edit #{@s_spielberg.name}")
+          expect(page).to have_field(:name, :with => "#{@s_spielberg.name}")
+          expect(page).to have_field(:best_director_oscars, :with => "#{@s_spielberg.best_director_oscars}")
+          expect(page).to have_field(:multiple_best_director_nominations, :with => "#{@s_spielberg.multiple_best_director_nominations}")
         end
+
+        it "displays the edits the user made in the edit screen on the show page after clicking 'Update Director'" do
+          visit ("/directors/#{@s_spielberg.id}")
+
+          expect(page).to_not have_content("Number of Best Director Oscars: 5")
+          expect(page).to have_content("Number of Best Director Oscars: 2")
+
+          click_link ('Update Director')
+
+          expect(current_path).to eq("/directors/#{@s_spielberg.id}/edit")
+
+          expect(page).to have_field(:best_director_oscars, :with => "2")
+
+          fill_in('best_director_oscars', with: '5')
+
+          click_button('Update Director') 
+
+          expect(current_path).to_not eq(directors_path)
+          expect(current_path).to eq("/directors/#{@s_spielberg.id}")
+        
+          expect(page).to_not have_field("Number of Best Director Oscars: 2")
+          expect(page).to have_content("Number of Best Director Oscars: 5")
+          expect(page).to have_content("Update Successful")
+        end 
       end
     end
   end

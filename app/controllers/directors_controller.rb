@@ -28,19 +28,18 @@ class DirectorsController < ApplicationController
 
   def edit
     @director = Director.find(params[:id])
+    # require 'pry';binding.pry
   end
-
+  
   def update
-    @update_director = Director.find(params[:id])
-    @update_director = Director.update(director_params)
-    
-    if @director.save 
-      flash.notice = "Update Successful"
-      redirect_to "/directors/#{@director.id}"
-    else
-      flash.notice = "Unacceptable to Update"
-      redirect_to "/directors/#{@director.id}/#{@update_director.id}"
-    end
+    @director = Director.find(params[:id])
+    @director.update!(director_params)
+
+    flash.notice = "Update Successful"
+    redirect_to "/directors/#{@director.id}"
+    # ISSUE:
+      #  when user goes show>edit>update/show>edit> 
+      #radio button for previous result not displaying consistently
   end
 
   private
