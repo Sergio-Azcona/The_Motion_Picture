@@ -38,7 +38,9 @@ RSpec.describe 'Directors Show Page' do
       expect(page).to have_content(@s_spielberg.best_director_oscars)
       expect(page).to have_content(@s_spielberg.multiple_best_director_nominations)
     end
+  end
 
+  describe 'User Story 10' do
     it "sends user to the director_film index page when the 'Film Catalogue' is click" do      
       visit ("/directors/#{@s_spielberg.id}")
       

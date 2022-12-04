@@ -2,5 +2,21 @@
 
 <% @directors.each do |director| %>
   <p><strong><%= link_to director.name, "/directors/#{director.id}"  %></strong></p>
-<hr>
+  <br>
 <% end %>
+
+<div style="position:fixed; padding: 1em; bottom:0; right: 0;">
+  <i><%= link_to 'Create New Director', directors_new_path %></i>
+</div>
+
+<head>
+<style>
+  body {
+    background-image: url('https://c7.alamy.com/comp/2F3WHMW/retro-photocamera-film-making-machine-cinematography-cam-isolated-monochrome-icon-vector-old-film-projector-camera-with-reels-movie-making-instru-2F3WHMW.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-right: 0; 
+    background-size:75% 130%;
+  }
+</style>
+</head>

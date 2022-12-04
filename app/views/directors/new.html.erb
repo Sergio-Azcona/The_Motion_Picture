@@ -1,0 +1,14 @@
+<center><h1>New Director</h1></center>
+
+<%= form_with url: directors_path, method: :post, local: true do |form|%>
+  <p><%= form.label :name, "Name" %>
+  <%= form.text_field :name %></p>
+
+  <%= form.label :best_director_oscars, "Number of Best Director Oscars" %>
+  <%= form.number_field :best_director_oscars, value: 0, min: 0 %></p>
+
+  <p><%= form.label :multiple_best_director_nominations, "Has Multiple Best Director Nominations?" %>
+  <%= form.radio_button :multiple_best_director_nominations, value=false %> Check if False
+  <%= form.radio_button :multiple_best_director_nominations, value=true %> Check if True </p>
+  <%= form.submit 'Add Director'%>
+<% end %>
