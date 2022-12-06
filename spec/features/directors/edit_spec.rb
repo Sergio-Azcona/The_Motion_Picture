@@ -58,14 +58,19 @@ RSpec.describe 'Edit Existing Director Page' do
 
           expect(page).to_not have_content("Number of Best Director Oscars: 5")
           expect(page).to have_content("Number of Best Director Oscars: 2")
+          expect(page).to_not have_content("false")
+          expect(page).to have_content("true")
 
           click_link ('Update Director')
+
 
           expect(current_path).to eq("/directors/#{@s_spielberg.id}/edit")
 
           expect(page).to have_field(:best_director_oscars, :with => "2")
-
+          
+          
           fill_in('best_director_oscars', with: '5')
+          choose('multiple_best_director_nominations', with: 'false')
 
           click_button('Update Director') 
 
@@ -74,6 +79,7 @@ RSpec.describe 'Edit Existing Director Page' do
         
           expect(page).to_not have_field("Number of Best Director Oscars: 2")
           expect(page).to have_content("Number of Best Director Oscars: 5")
+          expect(page).to have_content("false")
           expect(page).to have_content("Update Successful")
         end 
       end
