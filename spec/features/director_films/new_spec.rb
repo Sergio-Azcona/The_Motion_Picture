@@ -27,34 +27,35 @@ RSpec.describe 'New Film Page' do
   end
   
   describe 'User Story 13' do
-    it "has a 'New Film' link on the film indext page that takes user to '/films/new'" do
-      visit (films_path)
+    it "has a 'New Film' link on the director's film indext page that takes user to 'directors/director.id/films/new'" do
+      visit ("directors/#{@s_spielberg.id}/films")
 
       click_link ('Create New Film')
 
       expect(current_path).to_not eq(films_path)
-      expect(current_path).to eq(films_new_path)
+      expect(current_path).to eq("/directors/#{@s_spielberg.id}/films/new")
     end
 
     describe "page has a form for user to fill in film's attributes" do
-      describe "page has an 'Add film' button- which sends user to film index" do
-        it "displays the new record to film index page and a successful flash message" do
-          visit (films_new_path)
+      describe "page has an 'Add film' button-which sends user to director's film index if fully completed" do
+        it "displays the new record to director's film index page and a successful flash message" do
+          visit ("/directors/#{@s_spielberg.id}/films/new")
 
-          fill_in('Name', with: "Crouching Tiger, Hidden Dragon")
-          fill_in('Release Year', with: '2000')
-          choose('Best Picture Oscar', with: 'false')
-          
+          fill_in('Name', with: "West Side Story")
+          select( '2021', :from => 'release_year')
+          choose( 'best_picture_oscar' , :with => 'false') 
           click_button('Add film') 
 
-          expect(current_path).to_not eq(films_new_path)
-          expect(current_path).to_not eq(directors_path)
-          expect(current_path).to eq(films_path)
+          expect(current_path).to_not eq("/films/new")
+          expect(current_path).to_not eq("/directors")
+          expect(current_path).to eq("/directors/#{@s_spielberg.id}/films")
 
-          expect(page).to have_content("Crouching Tiger, Hidden Dragon")
+          expect(page).to have_content("West Side Story")
           expect(page).to have_content('Update Successful')
         end
       end
+
+      
     end
   end
 end

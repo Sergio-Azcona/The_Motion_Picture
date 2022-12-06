@@ -18,4 +18,9 @@ Rails.application.routes.draw do
   patch '/films/:id', to: 'films#update'
   
   get '/directors/:id/films', to: 'director_films#index'
+  post '/directors/:id/films', to: 'director_films#create'
+  get '/directors/:id/films/new', to: 'director_films#new'
+  get '/directors/:id/films/edit', to: 'director_films#edit'
+  get '/directors/:id/films/:id', to: 'director_films#show'
+  patch '/directors/:id/films/:id', to: 'director_films#update'
 end

@@ -6,13 +6,6 @@ class DirectorsController < ApplicationController
   def show
     @director = Director.find(params[:id])
   end
-    # require 'pry';binding.pry!!
-    # @director = Director.find(params[:id])
-    # @new_director = @director.new
-    # rendirect_to :create
-
-  def new
-  end
   
   def create
     @director = Director.create(director_params)
@@ -25,6 +18,13 @@ class DirectorsController < ApplicationController
     end
   end
   # flash message hide elemtent  https://bobbyhadz.com/blog/javascript-hide-element-after-few-seconds
+
+  def new
+    # require 'pry';binding.pry!!
+    # @director = Director.find(params[:id])
+    @director = Director.new
+    # rendirect_to :create
+  end
 
   def edit
     @director = Director.find(params[:id])

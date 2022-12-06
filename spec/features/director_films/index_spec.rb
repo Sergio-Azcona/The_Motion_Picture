@@ -36,7 +36,7 @@ RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
       expect(page).to have_content(@million_dollar_baby.name)
       expect(page).to have_content(@mystic_river.release_year) 
       expect(page).to have_content(@true_crime.best_picture_oscar)
-
+save_and_open_page
       within("#director-film-attributes-#{@unforgiven.id}")do
         expect(page).to_not have_content(@million_dollar_baby.name)
         expect(page).to_not have_content(@mystic_river.release_year) 

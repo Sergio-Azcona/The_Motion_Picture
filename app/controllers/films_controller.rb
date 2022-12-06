@@ -10,13 +10,16 @@ class FilmsController < ApplicationController
 
 
   def new
-    # @film = Film.find(params[:id])
-    # @film.new
+    # require 'pry';binding.pry
+    @directors = Director.all
+    @film = Film.new
   end
   
   def create
+    # require 'pry';binding.pry
+    
+    # @directors = Director.all
     @film = Film.create(film_params)
-    require 'pry';binding.pry
     if @film.save 
       flash.notice = "Update Successful"
       redirect_to films_path
@@ -32,6 +35,7 @@ class FilmsController < ApplicationController
   end
   
   def update
+    
     @film = Film.find(params[:id])
     @film.update!(film_params)
 
@@ -42,6 +46,6 @@ class FilmsController < ApplicationController
   private
   
   def film_params
-    params.permit(:name,:release_year,:best_picture_oscar)
+    params.permit(:name,:release_year,:best_picture_oscar,:director)
   end
 end
