@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
+RSpec.describe 'New Film Page' do
   before(:each) do 
     @c_eastwood = Director.create!(name: 'Clint Eastwood',best_director_oscars: 2 ,multiple_best_director_nominations: true)
     @k_bigelow = Director.create!(name: 'Kathryn Bigelow',best_director_oscars: 1,multiple_best_director_nominations: false)
@@ -24,28 +24,38 @@ RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
     @firelight = @s_spielberg.films.create!(name:'Firelight', release_year: 1964, best_picture_oscar: false)
     @jurassic_park = @s_spielberg.films.create!(name:"Jurassic Park", release_year: 1993, best_picture_oscar: false)
     @schindlers_list = @s_spielberg.films.create!(name:"Schindler's List", release_year: 1993, best_picture_oscar: true)
-  
   end
   
-  describe 'User Story 5' do
-    it "displays each film that is associated with that director with each film's attributes" do
-      visit ("/directors/#{@c_eastwood.id}/films")
-      expect(page).to_not have_content(@s_spielberg.name)
-      expect(page).to have_content(@c_eastwood.name)
-      
-      expect(page).to have_content(@million_dollar_baby.name)
-      expect(page).to have_content(@mystic_river.release_year) 
-      expect(page).to have_content(@true_crime.best_picture_oscar)
-save_and_open_page
-      within("#director-film-attributes-#{@unforgiven.id}")do
-        expect(page).to_not have_content(@million_dollar_baby.name)
-        expect(page).to_not have_content(@mystic_river.release_year) 
-        expect(page).to_not have_content(@true_crime.best_picture_oscar)
+  describe 'User Story 13' do
+    it "has a 'New Film' link on the director's film indext page that takes user to 'directors/director.id/films/new'" do
+      visit ("directors/#{@s_spielberg.id}/films")
 
-        expect(page).to have_content(@unforgiven.name)
-        expect(page).to have_content(@unforgiven.release_year) 
-        expect(page).to have_content(@unforgiven.best_picture_oscar)
+      click_link ('Create New Film')
+
+      expect(current_path).to_not eq(films_path)
+      expect(current_path).to eq("/directors/#{@s_spielberg.id}/films/new")
+    end
+
+    describe "page has a form for user to fill in film's attributes" do
+      describe "page has an 'Add film' button-which sends user to director's film index if fully completed" do
+        it "displays the new record to director's film index page and a successful flash message" do
+          visit ("/directors/#{@s_spielberg.id}/films/new")
+
+          fill_in('Name', with: "West Side Story")
+          select( '2021', :from => 'release_year')
+          choose( 'best_picture_oscar' , :with => 'false') 
+          click_button('Add film') 
+
+          expect(current_path).to_not eq("/films/new")
+          expect(current_path).to_not eq("/directors")
+          expect(current_path).to eq("/directors/#{@s_spielberg.id}/films")
+
+          expect(page).to have_content("West Side Story")
+          expect(page).to have_content('Update Successful')
+        end
       end
+
+      
     end
   end
 end
