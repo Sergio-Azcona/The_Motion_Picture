@@ -5,4 +5,8 @@ class Film < ApplicationRecord
   validates_numericality_of :release_year
   validates :best_picture_oscar, inclusion: [true, false]
 
+
+  def self.oscar_winners
+    where(best_picture_oscar: :true)
+  end
 end

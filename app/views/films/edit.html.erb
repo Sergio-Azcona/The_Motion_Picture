@@ -1,13 +1,15 @@
-<%= form_with url: path, method: method, local: true do |f| %>
+<center><h1 style="color: Tomato; padding: .5em"> Edit <%= @film.name %></h1></center>
+
+<%= form_with url: "/films/#{@film.id}", method: :patch, local: true do |f|%>
   <ul><%= f.label :name, "Name" %>
-  <%= f.text_field :name, value: @film.name %></ul>
+    <%= f.text_field :name, value: @film.name %></ul>
   
   <ul><%= f.label :release_year, "Release Year", value: @film.release_year %>
-  <%= f.select :release_year, (1878..Time.now.year).to_a,  {:release_year => "Select year"} %></ul>
+    <%= f.select :release_year, (1878..Time.now.year).to_a,  {:value => @film.release_year}  %></ul>
 
   <ul><%= f.label :best_picture_oscar, "Best Picture Oscar?", value: @film.best_picture_oscar %>
     <ol><%= f.radio_button :best_picture_oscar, value=false, { checked: !@film.best_picture_oscar} %> Check if False</ol>
     <ol><%= f.radio_button :best_picture_oscar, value=true, { checked: @film.best_picture_oscar} %> Check if True </ol></ul>
   
-  <%= f.submit button_text %>  
+  <%= f.submit "Update Film" %>  
 <% end %>

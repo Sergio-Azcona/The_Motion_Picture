@@ -12,7 +12,6 @@ class DirectorFilmsController < ApplicationController
   def create
     @director = Director.find(params[:id])
     @film = @director.films.create(director_film_params)
-    # require 'pry';binding.pry
     if @film.save 
       flash.notice = "Update Successful"
       redirect_to "/directors/#{@director.id}/films"

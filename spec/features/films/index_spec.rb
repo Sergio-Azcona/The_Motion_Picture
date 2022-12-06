@@ -30,30 +30,40 @@ RSpec.describe 'Films Index Page' do
 
   describe 'User Story 3' do
     it "displays each film in the system including the film's attributes" do
+      expect(page).to_not have_content(@zero_dark_thirty.release_year) 
       expect(page).to have_content(@schindlers_list.name)
-      expect(page).to have_content(@zero_dark_thirty.release_year) 
-      expect(page).to have_content(@hurt_locker.best_picture_oscar)
+      expect(page).to have_content(@unforgiven.best_picture_oscar)
 
-      within("#film-attributes-#{@jurassic_park.id}")do
+      within("#film-attributes-#{@hurt_locker.id}")do
         expect(page).to_not have_content(@schindlers_list.name)
         expect(page).to_not have_content(@mystic_river.release_year) 
-        expect(page).to_not have_content(@hurt_locker.best_picture_oscar)
+        expect(page).to_not have_content(@jurassic_park.best_picture_oscar)
         expect(page).to_not have_content(@perfect_world.director.name)
 
-        expect(page).to have_content(@jurassic_park.name)
-        expect(page).to have_content(@jurassic_park.release_year) 
-        expect(page).to have_content(@jurassic_park.best_picture_oscar)
-        expect(page).to have_content(@jurassic_park.director.name)
+        expect(page).to have_content(@hurt_locker.name)
+        expect(page).to have_content(@hurt_locker.release_year) 
+        expect(page).to have_content(@hurt_locker.best_picture_oscar)
+        expect(page).to have_content(@hurt_locker.director.name)
       end
     end
     
     it "sends user to the film's show page when the film name is click" do      
-      click_on ('Jurassic Park')
+      click_on ('Million Dollar Baby')
       
       # expect(current_path).to_not eq("/directors/#{@s_spielberg.id}")
       expect(current_path).to_not eq("/films/#{@firelight.id}")
       
-      expect(current_path).to eq("/films/#{@jurassic_park .id}")
+      expect(current_path).to eq("/films/#{@million_dollar_baby.id}")
+    end
+  end
+
+  describe 'Story 15-display only oscar winners' do
+    it "only displays records where the best_picture_oscar column is 'true'" do
+      # save_and_open_page
+      expect(page).to have_content("#{@million_dollar_baby.name}")
+      expect(page).to have_content("#{@unforgiven.name}")
+      expect(page).to have_content("#{@hurt_locker.name}")
+      expect(page).to_not have_content("false")
     end
   end
 end

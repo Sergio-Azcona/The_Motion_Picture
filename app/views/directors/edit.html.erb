@@ -11,7 +11,8 @@
   <p><%= form.label :multiple_best_director_nominations, "Has Multiple Best Director Nominations?" %> &nbsp <strong></p>
   
   <p><%= form.radio_button :multiple_best_director_nominations, value=false, { checked: !@director.multiple_best_director_nominations } %> Check if False
-    <%= form.radio_button :multiple_best_director_nominations, value=true, { checked: @director.multiple_best_director_nominations }  %> Check if True
-   </p>
+  <%= form.radio_button :multiple_best_director_nominations, value=true, { checked: @director.multiple_best_director_nominations }  %> Check if True </p>
+  
   <%= form.submit 'Update Director'%>
+
 <% end %>

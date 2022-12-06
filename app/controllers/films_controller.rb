@@ -1,7 +1,7 @@
 class FilmsController < ApplicationController
 
   def index
-    @films = Film.all
+    @films = Film.oscar_winners
   end
 
   def show
@@ -35,17 +35,16 @@ class FilmsController < ApplicationController
   end
   
   def update
-    
     @film = Film.find(params[:id])
     @film.update!(film_params)
-
+# require 'pry';binding.pry
     flash.notice = "Update Successful"
-    redirect_to films_path
+    redirect_to "/films/#{@film.id}"
   end
 
   private
   
   def film_params
-    params.permit(:name,:release_year,:best_picture_oscar,:director)
+    params.permit(:name,:release_year,:best_picture_oscar)
   end
 end
