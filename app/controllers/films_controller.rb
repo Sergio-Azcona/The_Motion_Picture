@@ -1,7 +1,7 @@
 class FilmsController < ApplicationController
 
   def index
-    @films = Film.all
+    @films = Film.oscar_winners
   end
 
   def show
