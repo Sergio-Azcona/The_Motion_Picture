@@ -31,15 +31,17 @@ RSpec.describe Film do
     end
   end
 
-  describe 'User Story 16-Sort Alphabetical Order by name' do
-    it 'returns records  ordered in alphabetical order' do
-      expect(Film.alphabetical_order).to_not eq([@zero_dark_thirty,@unforgiven,@hurt_locker,@million_dollar_baby,@eyes_wide_shut,@perfect_world,@clockwork_orange])
-      expect(Film.alphabetical_order).to_not eq([@clockwork_orange,@perfect_world,@zero_dark_thirty,@unforgiven,@hurt_locker,@million_dollar_baby,@eyes_wide_shut])
-      expect(Film.alphabetical_order).to_not eq([@clockwork_orange,@perfect_world,@eyes_wide_shut])
+  # describe 'User Story 16-Sort Alphabetical Order by name' do
+  #   it 'returns records  ordered in alphabetical order' do
+  #     expect(Film.alphabetical_order).to_not eq([@zero_dark_thirty,@unforgiven,@hurt_locker,@million_dollar_baby,@eyes_wide_shut,@perfect_world,@clockwork_orange])
+  #     expect(Film.alphabetical_order).to_not eq([@clockwork_orange,@perfect_world,@zero_dark_thirty,@unforgiven,@hurt_locker,@million_dollar_baby,@eyes_wide_shut])
+  #     expect(Film.alphabetical_order).to_not eq([@clockwork_orange,@perfect_world,@eyes_wide_shut])
      
-      expect(Film.alphabetical_order).to eq([@clockwork_orange,@perfect_world,@eyes_wide_shut,@million_dollar_baby,@hurt_locker,@unforgiven,@zero_dark_thirty])
-    end
-  end
+  #     expect(Film.alphabetical_order).to eq([@clockwork_orange,@perfect_world,@eyes_wide_shut,@million_dollar_baby,@hurt_locker,@unforgiven,@zero_dark_thirty])
+  #   end
+  # end
+
+ 
 
 end
 

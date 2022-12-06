@@ -46,7 +46,15 @@ RSpec.describe Director do
       expect(@s_kubrick.film_count).to eq 3
       expect(@c_eastwood.film_count).to eq 5
     end
-
   end
-    
+
+  describe 'Story 16, Sort Films Alphabetical by name' do
+    it 'returns director films sort alphabetical by name' do
+      expect(@s_kubrick.ordered_alphabetical).to_not eq([@fear_and_desire,@eyes_wide_shut,@clockwork_orange])
+      expect(@s_kubrick.ordered_alphabetical).to_not eq([@clockwork_orange,@perfect_world,@fear_and_desire])
+
+      expect(@s_kubrick.ordered_alphabetical).to eq([@clockwork_orange,@eyes_wide_shut,@fear_and_desire])
+    end
+  end
+
 end

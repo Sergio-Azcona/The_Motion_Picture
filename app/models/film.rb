@@ -13,4 +13,10 @@ class Film < ApplicationRecord
   def self.alphabetical_order 
     order(name: :asc)
   end
+
+  # def ordered_alpha
+  #   # self.order(:name)
+  #   where(director: :self).order(:name)
+  #   require 'pry';binding.pry
+  # end
 end

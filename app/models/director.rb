@@ -11,5 +11,11 @@ class Director < ApplicationRecord
   def film_count
     films.count
   end
+
+  def ordered_alphabetical
+    films.order(:name)
+  end
+
+ 
   
 end
