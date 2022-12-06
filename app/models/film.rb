@@ -9,4 +9,8 @@ class Film < ApplicationRecord
   def self.oscar_winners
     where(best_picture_oscar: :true)
   end
+
+  def self.alphabetical_order 
+    order(name: :asc)
+  end
 end
