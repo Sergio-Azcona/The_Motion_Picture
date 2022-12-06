@@ -5,7 +5,6 @@ class Film < ApplicationRecord
   validates_numericality_of :release_year
   validates :best_picture_oscar, inclusion: [true, false]
 
-
   def self.oscar_winners
     where(best_picture_oscar: :true)
   end
@@ -13,6 +12,10 @@ class Film < ApplicationRecord
   def self.alphabetical_order 
     order(name: :asc)
   end
+
+  # def ordered_alphabetical
+  #   films.order(:name)
+  # end
 
   # def ordered_alpha
   #   # self.order(:name)

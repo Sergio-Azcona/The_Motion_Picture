@@ -14,8 +14,5 @@ class Director < ApplicationRecord
 
   def ordered_alphabetical
     films.order(:name)
-  end
-
- 
-  
+  end 
 end

@@ -17,9 +17,9 @@ RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
     @loveless = @k_bigelow.films.create!(name:'The Loveless', release_year: 1981, best_picture_oscar: false)
     @zero_dark_thirty = @k_bigelow.films.create!(name:'Zero Dark Thirty', release_year: 2012, best_picture_oscar: false)
     
-    @clockwork_orange = @s_kubrick.films.create!(name:'A Clockwork Orange', release_year: 1971, best_picture_oscar: false)
     @eyes_wide_shut = @s_kubrick.films.create!(name:'Eyes Wide Shut', release_year: 1999, best_picture_oscar: false)
     @fear_and_desire = @s_kubrick.films.create!(name:'Fear and Desire', release_year: 1952, best_picture_oscar: false)
+    @clockwork_orange = @s_kubrick.films.create!(name:'A Clockwork Orange', release_year: 1971, best_picture_oscar: false)
     
     @firelight = @s_spielberg.films.create!(name:'Firelight', release_year: 1964, best_picture_oscar: false)
     @jurassic_park = @s_spielberg.films.create!(name:"Jurassic Park", release_year: 1993, best_picture_oscar: false)
@@ -36,7 +36,7 @@ RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
       expect(page).to have_content(@million_dollar_baby.name)
       expect(page).to have_content(@mystic_river.release_year) 
       expect(page).to have_content(@true_crime.best_picture_oscar)
-save_and_open_page
+      # save_and_open_page
       within("#director-film-attributes-#{@unforgiven.id}")do
         expect(page).to_not have_content(@million_dollar_baby.name)
         expect(page).to_not have_content(@mystic_river.release_year) 
@@ -48,4 +48,19 @@ save_and_open_page
       end
     end
   end
+
+  describe 'Story 16, Sort Films Alphabetical by name' do
+    it 'displays director films sort alphabetical by name if the sort link selected' do
+      visit ("/directors/#{@s_kubrick.id}/films")
+      
+      expect(page).to have_content('Sort Films A to Z')
+      click_link ('Sort Films A to Z')
+      
+      expect(@s_kubrick.ordered_alphabetical).to_not eq([@eyes_wide_shut,@clockwork_orange,@fear_and_desire])     
+      expect(@s_kubrick.ordered_alphabetical).to_not eq([@eyes_wide_shut,@fear_and_desire,@clockwork_orange])
+      
+      expect(@s_kubrick.ordered_alphabetical).to eq([@clockwork_orange,@eyes_wide_shut,@fear_and_desire])
+    end
+  end
+
 end
