@@ -5,7 +5,8 @@
   <div id="director-film-attributes-<%=film.id %>">
     <h3 style="color: FireBrick"><%= film.name %></h3>
     <ul>Release Year <%= film.release_year %>, Best Picture Oscar Winner? <%= film.best_picture_oscar%></ul>
-   <ul>Entry Created (dd/mm/yyyy): <%= film.created_at.strftime("%d/%m/%Y") %>, Entry Last Updated (dd/mm/yyyy): <%= film.updated_at.strftime("%d/%m/%Y")%></ul>
+    <ul>Entry Created (dd/mm/yyyy): <%= film.created_at.strftime("%d/%m/%Y") %>, Entry Last Updated (dd/mm/yyyy): <%= film.updated_at.strftime("%d/%m/%Y")%></ul>
+    <ul><%= link_to "Update Film #{film.name}", "/films/#{film.id}/edit" %></ul>
   </div>
 <% end %>
 

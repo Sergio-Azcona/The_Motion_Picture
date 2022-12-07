@@ -63,4 +63,28 @@ RSpec.describe "Director_Films Index ('/directorss/:director_id/films') Page" do
     end
   end
 
+  describe 'User Story 18, film Update From film Index Page' do
+    describe 'has a link to edit that film next to every film' do
+     it "takes user to that specific film's edit page" do
+      visit ("/directors/#{@c_eastwood.id}/films")
+
+      expect(page).to have_link("#{@mystic_river.name}")
+      expect(page).to have_link("Update Film #{@perfect_world.name}") 
+
+        within("#director-film-attributes-#{@million_dollar_baby.id}")do
+          expect(page).to_not have_link("#{@true_crime.name}")
+          expect(page).to_not have_link("Update film #{@unforgiven.name}")          
+        
+          expect(page).to have_link("#{@million_dollar_baby.name}")
+          expect(page).to have_link("Update Film #{@million_dollar_baby.name}")
+        end
+
+      click_link("Update Film #{@million_dollar_baby.name}")
+
+      expect(current_path).to_not eq(films_path)
+      expect(current_path).to_not eq("/films/#{@mystic_river.id}/edit")
+      expect(current_path).to eq("/films/#{@million_dollar_baby.id}/edit")
+      end
+    end
+  end
 end
