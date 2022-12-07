@@ -58,4 +58,27 @@ RSpec.describe 'Directors Index Page' do
     end
   end
 
+  describe 'User Story 17, Director Update From Director Index Page' do
+    describe 'has a link to edit that director next to every director' do
+     it "takes user to that specific director's edit page" do
+        
+      expect(page).to have_link("#{@s_spielberg.name}")
+      expect(page).to have_link("Update Director #{@s_spielberg.name}") 
+
+        within("#director-links-#{@k_bigelow.id}") do
+          expect(page).to_not have_link("#{@s_spielberg.name}")
+          expect(page).to_not have_link("Update Director #{@s_spielberg.name}")          
+        
+          expect(page).to have_link("#{@k_bigelow.name}")
+          expect(page).to have_link("Update Director #{@k_bigelow.name}")
+        end
+
+      click_link("Update Director #{@k_bigelow.name}")
+
+      expect(current_path).to_not eq(directors_path)
+      expect(current_path).to_not eq("/directors/#{@s_spielberg.id}/edit")
+      expect(current_path).to eq("/directors/#{@k_bigelow.id}/edit")
+      end
+    end
+  end
 end

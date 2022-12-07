@@ -66,4 +66,28 @@ RSpec.describe 'Films Index Page' do
       expect(page).to_not have_content("false")
     end
   end
+
+  describe 'User Story 18, film Update From film Index Page' do
+    describe 'has a link to edit that film next to every film' do
+     it "takes user to that specific film's edit page" do
+        
+      expect(page).to have_link("#{@hurt_locker.name}")
+      expect(page).to have_link("Update Film #{@hurt_locker.name}") 
+
+      within("#film-attributes-#{@million_dollar_baby.id}")do
+          expect(page).to_not have_link("#{@loveless.name}")
+          expect(page).to_not have_link("Update film #{@loveless.name}")          
+        
+          expect(page).to have_link("#{@million_dollar_baby.name}")
+          expect(page).to have_link("Update Film #{@million_dollar_baby.name}")
+        end
+
+      click_link("Update Film #{@million_dollar_baby.name}")
+
+      expect(current_path).to_not eq(films_path)
+      expect(current_path).to_not eq("/films/#{@hurt_locker.id}/edit")
+      expect(current_path).to eq("/films/#{@million_dollar_baby.id}/edit")
+      end
+    end
+  end
 end

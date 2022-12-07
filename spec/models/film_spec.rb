@@ -13,18 +13,14 @@ RSpec.describe Film do
     @s_kubrick = Director.create!(name: 'Stanley Kubrick',best_director_oscars: 0,multiple_best_director_nominations: true, created_at: 20.seconds.ago)
     
     @million_dollar_baby = @c_eastwood.films.create!(name:'Million Dollar Baby', release_year: 2004, best_picture_oscar: true)
-    @mystic_river = @c_eastwood.films.create!(name:'Mystic River', release_year: 2003, best_picture_oscar: false)
     @perfect_world = @c_eastwood.films.create!(name:'A Perfect World', release_year: 1993, best_picture_oscar: false)
-    @true_crime = @c_eastwood.films.create!(name:'True Crime', release_year: 1999, best_picture_oscar: false)
     @unforgiven = @c_eastwood.films.create!(name:'Unforgiven', release_year: 1992, best_picture_oscar: true)
     
     @hurt_locker = @k_bigelow.films.create!(name:'The Hurt Locker', release_year: 2008, best_picture_oscar: true)
-    @loveless = @k_bigelow.films.create!(name:'The Loveless', release_year: 1981, best_picture_oscar: false)
     @zero_dark_thirty = @k_bigelow.films.create!(name:'Zero Dark Thirty', release_year: 2012, best_picture_oscar: false)
     
     @clockwork_orange = @s_kubrick.films.create!(name:'A Clockwork Orange', release_year: 1971, best_picture_oscar: false)
     @eyes_wide_shut = @s_kubrick.films.create!(name:'Eyes Wide Shut', release_year: 1999, best_picture_oscar: false)
-    @fear_and_desire = @s_kubrick.films.create!(name:'Fear and Desire', release_year: 1952, best_picture_oscar: false)
   end
 
   describe 'Story 15-returns only oscar winners' do
@@ -35,4 +31,18 @@ RSpec.describe Film do
     end
   end
 
+  # describe 'User Story 16-Sort Alphabetical Order by name' do
+  #   it 'returns records  ordered in alphabetical order' do
+  #     expect(Film.alphabetical_order).to_not eq([@zero_dark_thirty,@unforgiven,@hurt_locker,@million_dollar_baby,@eyes_wide_shut,@perfect_world,@clockwork_orange])
+  #     expect(Film.alphabetical_order).to_not eq([@clockwork_orange,@perfect_world,@zero_dark_thirty,@unforgiven,@hurt_locker,@million_dollar_baby,@eyes_wide_shut])
+  #     expect(Film.alphabetical_order).to_not eq([@clockwork_orange,@perfect_world,@eyes_wide_shut])
+     
+  #     expect(Film.alphabetical_order).to eq([@clockwork_orange,@perfect_world,@eyes_wide_shut,@million_dollar_baby,@hurt_locker,@unforgiven,@zero_dark_thirty])
+  #   end
+  # end
+
+ 
+
 end
+
+

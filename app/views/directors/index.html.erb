@@ -1,7 +1,10 @@
 <h1 style="color: navy"><center>Directors<center></h1>
 
 <% @directors.each do |director| %>
-  <p><strong><%= link_to director.name, "/directors/#{director.id}"  %></strong></p>
+  <div id="director-links-<%= director.id %>">
+    <p><strong><%= link_to director.name, "/directors/#{director.id}"  %></strong>
+    <ul><%= link_to "Update Director #{director.name}", "/directors/#{director.id}/edit" %></ul></p>
+  </div>
   <br>
 <% end %>
 
